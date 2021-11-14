@@ -6,7 +6,9 @@ class ThemeColors {
   static Color get brandColorSecondary => const Color(0xFF0079FF);
 
   //blue tint
-  static Color get blueGray10 => const Color(0xFFCBD5DC);
+  static Color get blueGray10 => const Color(0xFFF4F8FA);
+
+  static Color get blueGray50 => const Color(0xFFE9EEF2);
 
   static Color get blueGray100 => const Color(0xFFFFE866);
 
