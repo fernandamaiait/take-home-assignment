@@ -13,7 +13,7 @@ class Navbar extends StatelessWidget {
     return Container(
       height: isLargeScreen(context) ? 80 : 56,
       width: MediaQuery.of(context).size.width,
-      color: Colors.red, // ThemeColors.neutralWhite,
+      color: ThemeColors.neutralWhite,
       child: Text(title),
     );
   }
