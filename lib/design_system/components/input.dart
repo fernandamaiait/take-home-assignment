@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:take_home_assignment/design_system/theme_colors.dart';
 import 'package:take_home_assignment/design_system/typography.dart';
 
+import '../utils.dart';
+
 class Input extends StatefulWidget {
   final String label;
 
@@ -21,7 +23,7 @@ class _InputState extends State<Input> {
   @override
   void initState() {
     border = OutlineInputBorder(
-      borderSide: BorderSide(color: ThemeColors.blueGray50),
+      borderSide: BorderSide(color: Colors.transparent),
     );
     super.initState();
   }
@@ -34,24 +36,25 @@ class _InputState extends State<Input> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.label),
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: '',
-            labelStyle: ThemeTypography.description(context),
-            focusedBorder: border,
-            enabledBorder: border,
-
-            // border: OutlineInputBorder(
-            //   borderSide: BorderSide(
-            //     width: 1,
-            //     color: Colors.red,
-            //   ),
-            //   borderRadius: const BorderRadius.all(
-            //     Radius.circular(4),
-            //   ),
-            // ),
+        Text(
+          widget.label,
+          style: ThemeTypography.description(context),
+        ),
+        SizedBox(height: 4),
+        Container(
+          height: 56,
+          decoration: BoxDecoration(
+            border: Border.all(color: ThemeColors.blueGray50),
+            borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          ),
+          child: TextFormField(
+            decoration: InputDecoration(
+              labelText: '',
+              focusedBorder: border,
+              enabledBorder: border,
+            ),
           ),
         ),
       ],
