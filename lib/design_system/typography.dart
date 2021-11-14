@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:take_home_assignment/design_system/colors.dart';
+import 'package:take_home_assignment/design_system/theme_colors.dart';
+import 'package:take_home_assignment/design_system/utils.dart';
 
-class Typography {
+class ThemeTypography {
   static TextStyle headingMedium(
     BuildContext context, {
     FontWeight? fontWeight,
     Color? color,
   }) {
-    final bool useLargeFonts = MediaQuery.of(context).size.width > 480;
     return TextStyle(
       fontFamily: FontFamily.rubik,
-      fontSize: useLargeFonts ? 32 : 24,
+      fontSize: isLargeScreen(context) ? 32 : 24,
       height: 1.2,
       fontWeight: fontWeight ?? FontWeight.w500,
       color: color ?? ThemeColors.brandColorSecondary,
@@ -22,10 +22,9 @@ class Typography {
     FontWeight? fontWeight,
     Color? color,
   }) {
-    final bool useLargeFonts = MediaQuery.of(context).size.width > 480;
     return TextStyle(
       fontFamily: FontFamily.rubik,
-      fontSize: useLargeFonts ? 24 : 20,
+      fontSize: isLargeScreen(context) ? 24 : 20,
       height: 1.2,
       fontWeight: fontWeight ?? FontWeight.w500,
       color: color ?? ThemeColors.blueGray900,
@@ -37,11 +36,9 @@ class Typography {
     FontWeight? fontWeight,
     Color? color,
   }) {
-    final bool useLargeFonts = MediaQuery.of(context).size.width > 480;
-
     return TextStyle(
       fontFamily: FontFamily.workSans,
-      fontSize: useLargeFonts ? 20 : 18,
+      fontSize: isLargeScreen(context) ? 20 : 18,
       height: 1.2,
       fontWeight: fontWeight ?? FontWeight.normal,
       color: color ?? ThemeColors.blueGray900,
@@ -53,10 +50,8 @@ class Typography {
     FontWeight? fontWeight,
     Color? color,
   }) {
-    final bool useLargeFonts = MediaQuery.of(context).size.width > 480;
-
     return TextStyle(
-      fontSize: useLargeFonts ? 16 : 14,
+      fontSize: isLargeScreen(context) ? 16 : 14,
       height: 1.5,
       fontWeight: fontWeight ?? FontWeight.w400,
       color: color ?? ThemeColors.blueGray400,
@@ -68,10 +63,9 @@ class Typography {
     FontWeight? fontWeight,
     Color? color,
   }) {
-    final bool useLargeFonts = MediaQuery.of(context).size.width > 480;
     return TextStyle(
       fontFamily: FontFamily.workSans,
-      fontSize: useLargeFonts ? 14 : 12,
+      fontSize: isLargeScreen(context) ? 14 : 12,
       height: 1.5,
       fontWeight: fontWeight ?? FontWeight.normal,
       color: color ?? ThemeColors.blueGray400,
