@@ -11,8 +11,6 @@ class MonthlyAmountInfo extends StatelessWidget {
     return Container(
       width: isLargeScreen(context) ? 480 : 312,
       height: 155,
-      // padding: EdgeInsets.symmetric(
-      //     horizontal: isLargeScreen(context) ? 32 : 24, vertical: 24),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
         border: Border.all(
@@ -22,71 +20,67 @@ class MonthlyAmountInfo extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Flexible(
-            flex: 1,
-            child: Expanded(
-              child: Container(
-                width: double.infinity,
-                child: Text('teste'),
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: Expanded(
-              child: Container(
-                width: double.infinity,
-                // padding: EdgeInsets.symmetric(
-                //   horizontal: 32,
-                //   vertical: 24,
-                // ),
-                color: ThemeColors.blueGray10,
-                child: Center(
-                  child: Text(
-                    'You’re planning 48 monthly deposits to reach your \$25,000 goal by October 2020.',
-                    style: ThemeTypography.caption(),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          UpperContainer(),
+          LowerContainer(),
         ],
       ),
-      // child: Expanded(
-      //   child: Row(
-      //     // mainAxisSize: MainAxisSize.max,
-      //     children: [
-      //       Expanded(
-      //         child: Column(
-      //           //     mainAxisSize: MainAxisSize.max,
-      //           children: [
-      //             Expanded(
-      //               child: Row(children: [
-      //                 Expanded(
-      //                   child: Container(
-      //                     color: Colors.red,
-      //                     child: Expanded(child: Text('teste')),
-      //                   ),
-      //                 ),
-      //               ]),
-      //             ),
-      //             Expanded(
-      //               child: Row(mainAxisSize: MainAxisSize.max, children: [
-      //                 Expanded(
-      //                   child: Container(
-      //                     color: Colors.green,
-      //                     child: Expanded(child: Text('teste')),
-      //                   ),
-      //                 ),
-      //               ]),
-      //             ),
-      //           ],
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
+    );
+  }
+}
+
+class UpperContainer extends StatelessWidget {
+  const UpperContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      child: Expanded(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            vertical: 0,
+            horizontal: isLargeScreen(context) ? 32 : 24,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Monthly amount',
+                style: ThemeTypography.subtitle(context),
+              ),
+              Text(
+                '\$520.83',
+                style: ThemeTypography.headingMedium(context),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LowerContainer extends StatelessWidget {
+  const LowerContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      child: Expanded(
+        child: Container(
+          width: double.infinity,
+          color: ThemeColors.blueGray10,
+          child: Center(
+            child: Text(
+              'You’re planning 48 monthly deposits to reach your \$25,000 goal by October 2020.',
+              style: ThemeTypography.caption(),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
