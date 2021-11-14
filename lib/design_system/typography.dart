@@ -65,7 +65,7 @@ class ThemeTypography {
       fontSize: isLargeScreen(context) ? 14 : 12,
       height: 1.5,
       fontWeight: fontWeight ?? FontWeight.normal,
-      color: color ?? ThemeColors.blueGray400,
+      color: color ?? ThemeColors.blueGray900,
     );
   }
 
@@ -76,7 +76,7 @@ class ThemeTypography {
     return GoogleFonts.workSans(
       fontSize: 12,
       height: 1.33,
-      fontWeight: fontWeight ?? FontWeight.normal,
+      fontWeight: fontWeight ?? FontWeight.w400,
       color: color ?? ThemeColors.blueGray900,
     );
   }
