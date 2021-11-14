@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:take_home_assignment/design_system/theme_colors.dart';
 import 'package:take_home_assignment/pages/home/home.dart';
 
 void main() {
@@ -12,6 +13,7 @@ class App extends StatelessWidget {
       title: 'Origin',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        primaryColor: ThemeColors.brandColorPrimary,
       ),
       debugShowCheckedModeBanner: false,
       home: Home(),
