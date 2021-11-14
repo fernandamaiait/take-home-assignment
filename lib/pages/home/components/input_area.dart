@@ -1,5 +1,6 @@
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
+import 'package:take_home_assignment/design_system/components/calendar.dart';
 import 'package:take_home_assignment/design_system/components/currency_input.dart';
 import 'package:take_home_assignment/design_system/components/input.dart';
 import 'package:take_home_assignment/design_system/utils.dart';
@@ -29,12 +30,21 @@ class _InputAreaState extends State<InputArea> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: Column(
+      child: Flex(
+        mainAxisSize: MainAxisSize.min,
+        direction: isLargeScreen(context) ? Axis.horizontal : Axis.vertical,
         children: [
-          Input(
-            label: 'Total amount',
+          Flexible(
+            flex: 3,
+            child: Input(
+              label: 'Total amount',
+            ),
           ),
-          Text('teste'),
+          isLargeScreen(context) ? SizedBox(width: 16) : SizedBox(height: 16),
+          Flexible(
+            flex: 2,
+            child: Calendar(label: 'Reach goal by'),
+          ),
         ],
       ),
       // child: Flex(

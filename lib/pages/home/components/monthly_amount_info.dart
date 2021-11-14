@@ -70,14 +70,39 @@ class LowerContainer extends StatelessWidget {
       flex: 1,
       child: Expanded(
         child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 31),
           width: double.infinity,
           color: ThemeColors.blueGray10,
           child: Center(
-            child: Text(
-              'You’re planning 48 monthly deposits to reach your \$25,000 goal by October 2020.',
-              style: ThemeTypography.caption(),
-              textAlign: TextAlign.center,
+            child: Text.rich(
+              TextSpan(
+                text: 'You’re planning ',
+                style: ThemeTypography.caption(),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '48 monthly deposits ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'to reach your ',
+                  ),
+                  TextSpan(
+                    text: '\$25,000 goal by October 2020.',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
             ),
+            // Text(
+            //   '    ',
+            //   style: ThemeTypography.caption(),
+            //   textAlign:
+            //       isLargeScreen(context) ? TextAlign.left : TextAlign.center,
+            // ),
           ),
         ),
       ),
