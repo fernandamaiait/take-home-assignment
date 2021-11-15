@@ -17,18 +17,23 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ThemeColors.blueGray10,
-      body: Column(
-        children: [
-          Navbar(),
-          SizedBox(height: isLargeScreen(context) ? 48 : 32),
-          Column(
+      appBar: Navbar(),
+      body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Center(
+          child: Column(
             children: [
-              HomeTitle(),
-              SizedBox(height: 24),
-              SimulationCard(),
+              SizedBox(height: isLargeScreen(context) ? 48 : 32),
+              Column(
+                children: [
+                  HomeTitle(),
+                  SizedBox(height: 24),
+                  SimulationCard(),
+                ],
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

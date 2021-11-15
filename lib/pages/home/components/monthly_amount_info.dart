@@ -9,7 +9,7 @@ class MonthlyAmountInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: isLargeScreen(context) ? 480 : 312,
+      width: double.infinity, //isLargeScreen(context) ? 480 : 312,
       height: 155,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
