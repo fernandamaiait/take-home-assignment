@@ -21,7 +21,6 @@ class Calendar extends StatelessWidget {
         ),
         SizedBox(height: 4),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
           height: 56,
           decoration: BoxDecoration(
             border: Border.all(color: ThemeColors.blueGray50),
@@ -30,33 +29,72 @@ class Calendar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                Icons.chevron_left,
-                color: ThemeColors.blueGray300,
+              Chevron(
+                isRightChevron: false,
               ),
-              Column(
-                children: [
-                  Text(
-                    'October',
-                    style: ThemeTypography.paragraph(
-                      context,
-                      fontWeight: FontWeight.w600,
-                      color: ThemeColors.blueGray900,
-                    ),
-                  ),
-                  Text(
-                    '2021',
-                    style: ThemeTypography.paragraph(
-                      context,
-                    ),
-                  ),
-                ],
-              ),
-              Icon(
-                Icons.chevron_right,
-                color: ThemeColors.blueGray300,
-              ),
+              Period(),
+              Chevron(),
             ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Chevron extends StatelessWidget {
+  final bool isRightChevron;
+
+  const Chevron({
+    this.isRightChevron = true,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          isRightChevron ? print('right') : print('left');
+        },
+        child: Container(
+          padding: isRightChevron
+              ? EdgeInsets.only(right: 21)
+              : EdgeInsets.only(left: 21),
+          height: double.infinity,
+          child: Align(
+            alignment:
+                isRightChevron ? Alignment.centerRight : Alignment.centerLeft,
+            child: Icon(
+              isRightChevron ? Icons.chevron_right : Icons.chevron_left,
+              color: ThemeColors.blueGray300,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Period extends StatelessWidget {
+  const Period({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'October',
+          style: ThemeTypography.paragraph(
+            context,
+            fontWeight: FontWeight.w600,
+            color: ThemeColors.blueGray900,
+          ),
+        ),
+        Text(
+          '2021',
+          style: ThemeTypography.paragraph(
+            context,
           ),
         ),
       ],

@@ -4,8 +4,11 @@ import 'package:take_home_assignment/design_system/theme_colors.dart';
 
 import '../utils.dart' as utils;
 
-class Navbar extends StatelessWidget {
+class Navbar extends StatelessWidget implements PreferredSizeWidget {
   const Navbar({Key? key}) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(80);
 
   @override
   Widget build(BuildContext context) {
