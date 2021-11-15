@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 import '../theme_colors.dart';
 import '../typography.dart';
 
 class Calendar extends StatelessWidget {
   final String label;
+  final DateTime date;
+  final Function incrementDate;
+  final Function decrementDate;
+
   const Calendar({
     required this.label,
+    required this.date,
+    required this.incrementDate,
+    required this.decrementDate,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final today = DateFormat.yMMMM().format(DateTime.now());
+    final finalDate = DateFormat.yMMMM().format(date);
+    final canDecrementDate = today != finalDate;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,11 +40,19 @@ class Calendar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              if (canDecrementDate)
+                Chevron(
+                  onTap: decrementDate,
+                  isRightChevron: false,
+                )
+              else
+                Expanded(
+                  child: Container(),
+                ),
+              Date(date: this.date),
               Chevron(
-                isRightChevron: false,
+                onTap: incrementDate,
               ),
-              Period(),
-              Chevron(),
             ],
           ),
         ),
@@ -43,9 +62,11 @@ class Calendar extends StatelessWidget {
 }
 
 class Chevron extends StatelessWidget {
+  final Function onTap;
   final bool isRightChevron;
 
   const Chevron({
+    required this.onTap,
     this.isRightChevron = true,
     Key? key,
   }) : super(key: key);
@@ -54,9 +75,7 @@ class Chevron extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: () {
-          isRightChevron ? print('right') : print('left');
-        },
+        onTap: () => onTap(),
         child: Container(
           padding: isRightChevron
               ? EdgeInsets.only(right: 21)
@@ -76,15 +95,22 @@ class Chevron extends StatelessWidget {
   }
 }
 
-class Period extends StatelessWidget {
-  const Period({Key? key}) : super(key: key);
+class Date extends StatelessWidget {
+  final DateTime date;
+
+  const Date({
+    required this.date,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final monthFormat = new DateFormat.MMMM();
+
     return Column(
       children: [
         Text(
-          'October',
+          monthFormat.format(date),
           style: ThemeTypography.paragraph(
             context,
             fontWeight: FontWeight.w600,
@@ -92,7 +118,7 @@ class Period extends StatelessWidget {
           ),
         ),
         Text(
-          '2021',
+          date.year.toString(),
           style: ThemeTypography.paragraph(
             context,
           ),

@@ -1,12 +1,18 @@
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:take_home_assignment/design_system/components/calendar.dart';
 import 'package:take_home_assignment/design_system/components/currency_input.dart';
 import 'package:take_home_assignment/design_system/components/input.dart';
 import 'package:take_home_assignment/design_system/utils.dart';
+import 'package:take_home_assignment/pages/home/store/home.store.dart';
 
 class InputArea extends StatefulWidget {
-  const InputArea({Key? key}) : super(key: key);
+  final DateTime finalDate;
+  const InputArea({
+    required this.finalDate,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _InputAreaState createState() => _InputAreaState();
@@ -14,6 +20,13 @@ class InputArea extends StatefulWidget {
 
 class _InputAreaState extends State<InputArea> {
   MoneyMaskedTextController? controller;
+  late HomeStore store;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    store = Provider.of<HomeStore>(context);
+  }
 
   @override
   void initState() {
@@ -43,37 +56,15 @@ class _InputAreaState extends State<InputArea> {
           isLargeScreen(context) ? SizedBox(width: 16) : SizedBox(height: 16),
           Flexible(
             flex: 2,
-            child: Calendar(label: 'Reach goal by'),
+            child: Calendar(
+              label: 'Reach goal by',
+              date: widget.finalDate,
+              incrementDate: store.incrementDate,
+              decrementDate: store.decrementDate,
+            ),
           ),
         ],
       ),
-      // child: Flex(
-      //   direction: isLargeScreen(context) ? Axis.horizontal : Axis.vertical,
-      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //   children: [
-      //     TextFormField(),
-      //     TextFormField(),
-      //     // Column(
-      //     //   children: [
-      //     //     Text('Total amount'),
-      //     // CurrencyInput(
-      //     //   label: 'Total amount',
-      //     //   controller: controller,
-      //     // ),
-      //     // Input(
-      //     //   controller: controller,
-      //     // ),
-      //     // Text('teste1'),
-      //     // Text('teste'),
-      //     //   ],
-      //     // ),
-      //     // Column(
-      //     //   children: [
-      //     //     Text('Reach goal by'),
-      //     //   ],
-      //     // ),
-      //   ],
-      // ),
     );
   }
 }
