@@ -10,7 +10,7 @@ class ThemeColors {
 
   static Color get blueGray50 => const Color(0xFFE9EEF2);
 
-  static Color get blueGray100 => const Color(0xFFFFE866);
+  static Color get blueGray100 => const Color(0xFFCBD5DC);
 
   static Color get blueGray300 => const Color(0xFF8A9CA9);
 

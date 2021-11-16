@@ -7,7 +7,7 @@ import 'package:take_home_assignment/design_system/utils.dart';
 import 'package:take_home_assignment/pages/home/components/header.dart';
 import 'package:take_home_assignment/pages/home/components/input_area.dart';
 import 'package:take_home_assignment/pages/home/components/monthly_amount_info.dart';
-import 'package:take_home_assignment/pages/home/store/home.store.dart';
+import 'package:take_home_assignment/pages/home/store/home_store.dart';
 
 class SimulationCard extends StatefulWidget {
   const SimulationCard({Key? key}) : super(key: key);

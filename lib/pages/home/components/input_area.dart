@@ -2,10 +2,10 @@ import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:take_home_assignment/design_system/components/calendar.dart';
-import 'package:take_home_assignment/design_system/components/currency_input.dart';
+
 import 'package:take_home_assignment/design_system/components/input.dart';
 import 'package:take_home_assignment/design_system/utils.dart';
-import 'package:take_home_assignment/pages/home/store/home.store.dart';
+import 'package:take_home_assignment/pages/home/store/home_store.dart';
 
 class InputArea extends StatefulWidget {
   final DateTime finalDate;
@@ -31,10 +31,10 @@ class _InputAreaState extends State<InputArea> {
   @override
   void initState() {
     controller = MoneyMaskedTextController(
-      leftSymbol: '\$ ',
       decimalSeparator: '.',
       thousandSeparator: ',',
       initialValue: 0,
+      precision: 2,
     );
     super.initState();
   }
@@ -50,14 +50,17 @@ class _InputAreaState extends State<InputArea> {
           Flexible(
             flex: 3,
             child: Input(
-              label: 'Total amount',
-            ),
+                label: 'Total amount',
+                controller: controller,
+                onChanged: (_) {
+                  store.setFinalAmount(controller!.numberValue);
+                }),
           ),
           isLargeScreen(context) ? SizedBox(width: 16) : SizedBox(height: 16),
           Flexible(
             flex: 2,
             child: Calendar(
-              label: 'Reach goal by',
+              label: 'Reach goal by ',
               date: widget.finalDate,
               incrementDate: store.incrementDate,
               decrementDate: store.decrementDate,

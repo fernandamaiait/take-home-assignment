@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:take_home_assignment/design_system/theme_colors.dart';
 import 'package:take_home_assignment/design_system/typography.dart';
 
 class Input extends StatefulWidget {
   final String label;
+  final controller;
+  final void Function(String?) onChanged;
+
+  final bool isCurrencyValue;
 
   Input({
     required this.label,
+    required this.controller,
+    required this.onChanged,
+    this.isCurrencyValue = false,
     Key? key,
   }) : super(key: key);
 
@@ -47,56 +55,28 @@ class _InputState extends State<Input> {
             borderRadius: BorderRadius.all(Radius.circular(4.0)),
           ),
           child: TextFormField(
+            keyboardType: widget.isCurrencyValue
+                ? TextInputType.number
+                : TextInputType.text,
+            style: ThemeTypography.headingSmall(
+              context,
+              color: ThemeColors.blueGray600,
+            ),
+            controller: widget.controller,
             decoration: InputDecoration(
               labelText: '',
               focusedBorder: border,
               enabledBorder: border,
+              prefix: Text('\$ '),
+              prefixStyle: ThemeTypography.headingSmall(
+                context,
+                color: ThemeColors.blueGray100,
+              ),
             ),
+            onChanged: widget.onChanged,
           ),
         ),
       ],
     );
   }
-
-  // } TextFormField(
-  //       textCapitalization: TextCapitalization.sentences,
-  //       initialValue: widget.initialValue,
-  //       // autofocus: widget.autofocus ?? false,
-  //       //   obscureText: widget.obscured ?? false,
-  //       controller: widget.controller,
-  //       validator: widget.validator,
-  //       keyboardType: widget.keyboardType,
-  //       // onSaved: widget.onSave,
-  //       // maxLength: widget.maxLength,
-  //       // focusNode: _inputFocusNode,
-  //       // inputFormatters: widget.inputFormatters,
-  //       // onChanged: widget.onChanged as void Function(String)?,
-  //       // onTap: widget.onTapEvent ?? () {},
-  //       // minLines: widget.minLines ?? 1,
-  //       // maxLines: widget.maxLines ?? 1,
-  //       // scrollPadding: widget.scrollPadding ?? const EdgeInsets.all(20.0),
-  //       decoration: InputDecoration(
-  //         // hintText: widget.hintText,
-  //         // suffix: widget.suffix,
-  //         errorMaxLines: 3,
-  //         labelText: ' ${widget.label ?? ""} ',
-  //         border: OutlineInputBorder(
-  //           // borderSide: BorderSide(
-  //           //   color: TokenColors.colorNeutralMedium,
-  //           // ),
-  //           borderRadius: const BorderRadius.all(
-  //             Radius.circular(10),
-  //           ),
-  //         ),
-  //         alignLabelWithHint: true,
-  //         //labelStyle: _inputFocusNode!.hasFocus ? TokenFonts.t5 : TokenFonts.t6,
-  //         // enabled: widget.enabled,
-  //         // errorText: widget.errorText,
-  //         // counterText: widget.counterText,
-  //         // contentPadding: EdgeInsets.symmetric(
-  //         //   horizontal: TokenPaddings.md,
-  //         //   vertical: TokenPaddings.sm,
-  //         // ),
-  //       ),
-  //     );
 }

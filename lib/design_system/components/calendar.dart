@@ -19,44 +19,49 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final today = DateFormat.yMMMM().format(DateTime.now());
+    final nextMonth = DateFormat.yMMMM().format(new DateTime(
+        DateTime.now().year, DateTime.now().month + 1, DateTime.now().day));
     final finalDate = DateFormat.yMMMM().format(date);
-    final canDecrementDate = today != finalDate;
+    final canDecrementDate = nextMonth != finalDate;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          this.label,
-          style: ThemeTypography.description(context),
-        ),
-        SizedBox(height: 4),
-        Container(
-          height: 56,
-          decoration: BoxDecoration(
-            border: Border.all(color: ThemeColors.blueGray50),
-            borderRadius: BorderRadius.all(Radius.circular(4.0)),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            this.label,
+            style: ThemeTypography.description(context),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              if (canDecrementDate)
+          SizedBox(height: 4),
+          Container(
+            height: 56,
+            decoration: BoxDecoration(
+              border: Border.all(color: ThemeColors.blueGray50),
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (canDecrementDate)
+                  Chevron(
+                    onTap: decrementDate,
+                    isRightChevron: false,
+                  )
+                else
+                  Expanded(
+                    child: Container(),
+                  ),
+                Date(date: this.date),
                 Chevron(
-                  onTap: decrementDate,
-                  isRightChevron: false,
-                )
-              else
-                Expanded(
-                  child: Container(),
+                  onTap: incrementDate,
+                  key: ValueKey('calendar_chevron_right'),
                 ),
-              Date(date: this.date),
-              Chevron(
-                onTap: incrementDate,
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -75,8 +80,12 @@ class Chevron extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: () => onTap(),
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+          onTap();
+        },
         child: Container(
+          color: ThemeColors.neutralWhite,
           padding: isRightChevron
               ? EdgeInsets.only(right: 21)
               : EdgeInsets.only(left: 21),

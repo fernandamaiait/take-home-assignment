@@ -1,34 +1,42 @@
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:take_home_assignment/design_system/utils.dart';
 
-part 'home.store.g.dart';
+part 'home_store.g.dart';
 
 class HomeStore = HomeStoreBase with _$HomeStore;
 
 abstract class HomeStoreBase with Store {
   @observable
-  DateTime finalDate = DateTime.now();
+  DateTime finalDate = new DateTime(
+      DateTime.now().year, DateTime.now().month + 1, DateTime.now().day);
   @observable
-  double monthlyAmount = 0;
+  double finalAmount = 0.00;
   @observable
-  double finalAmount = 0;
+  int totalMonths = 1;
 
-  int totalMonths = 0;
-
-  @observable
+  @computed
   get formattedMonth => new DateFormat.MMMM().format(finalDate);
+
+  @computed
+  get monthlyAmount => formatCurrency(finalAmount / totalMonths);
 
   @action
   void incrementDate() {
     finalDate =
         new DateTime(finalDate.year, finalDate.month + 1, finalDate.day);
-    totalMonths++;
+    totalMonths = totalMonths + 1;
   }
 
   @action
   void decrementDate() {
     finalDate =
         new DateTime(finalDate.year, finalDate.month - 1, finalDate.day);
-    totalMonths--;
+    totalMonths = totalMonths - 1;
+  }
+
+  @action
+  void setFinalAmount(double newFinalAmount) {
+    finalAmount = newFinalAmount;
   }
 }

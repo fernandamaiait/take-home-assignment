@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:take_home_assignment/design_system/theme_colors.dart';
 import 'package:take_home_assignment/design_system/typography.dart';
 import 'package:take_home_assignment/design_system/utils.dart';
-import 'package:take_home_assignment/pages/home/store/home.store.dart';
+import 'package:take_home_assignment/pages/home/store/home_store.dart';
 
 class MonthlyAmountInfo extends StatelessWidget {
   final HomeStore store;
@@ -26,7 +26,7 @@ class MonthlyAmountInfo extends StatelessWidget {
       ),
       child: Column(
         children: [
-          UpperContainer(monthlyAmount: store.monthlyAmount),
+          UpperContainer(store: store),
           LowerContainer(store: store),
         ],
       ),
@@ -35,9 +35,9 @@ class MonthlyAmountInfo extends StatelessWidget {
 }
 
 class UpperContainer extends StatelessWidget {
-  final double monthlyAmount;
+  final HomeStore store;
   const UpperContainer({
-    required this.monthlyAmount,
+    required this.store,
     Key? key,
   }) : super(key: key);
 
@@ -53,13 +53,23 @@ class UpperContainer extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Monthly amount',
-              style: ThemeTypography.subtitle(context),
+            Flexible(
+              child: Text(
+                'Monthly amount',
+                overflow: TextOverflow.fade,
+                style: ThemeTypography.subtitle(context),
+              ),
             ),
-            Text(
-              '\$${monthlyAmount.toString()}',
-              style: ThemeTypography.headingMedium(context),
+            SizedBox(width: 4),
+            Expanded(
+              child: Observer(builder: (_) {
+                return Text(
+                  store.monthlyAmount,
+                  style: ThemeTypography.headingMedium(context),
+                  textAlign: TextAlign.right,
+                  key: ValueKey('monthly_amount_text'),
+                );
+              }),
             ),
           ],
         ),
@@ -83,32 +93,43 @@ class LowerContainer extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 31),
         width: double.infinity,
         color: ThemeColors.blueGray10,
-        child: Center(
-          child: Text.rich(
-            TextSpan(
-              text: 'You’re planning ',
-              style: ThemeTypography.caption(),
-              children: <TextSpan>[
-                TextSpan(
-                  text: '${store.totalMonths.toString()} monthly deposits ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
+        child: Observer(builder: (_) {
+          // var finalAmount = '0.00';
+          // try {
+          //   finalAmount = formatCurrencyWithouCents(store.finalAmount);
+          // } catch (e) {
+          //   print(e);
+          // }
+          return Center(
+            child: RichText(
+              textAlign:
+                  isLargeScreen(context) ? TextAlign.left : TextAlign.center,
+              text: TextSpan(
+                text: 'You’re planning ',
+                style: ThemeTypography.caption(),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '${store.totalMonths.toString()} monthly deposits ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                TextSpan(
-                  text: 'to reach your ',
-                ),
-                TextSpan(
-                  text:
-                      '\$${store.finalAmount.toString()} goal by ${store.formattedMonth} ${store.finalDate.year}.',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
+                  TextSpan(
+                    text: 'to reach your ',
                   ),
-                ),
-              ],
+                  TextSpan(
+                    text:
+                        '${formatCurrency(store.finalAmount)} goal by ${store.formattedMonth} ${store.finalDate.year}.',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              key: ValueKey('monthly_amount_info_text'),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }
