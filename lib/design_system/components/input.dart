@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:take_home_assignment/design_system/theme_colors.dart';
 import 'package:take_home_assignment/design_system/typography.dart';
 
@@ -55,6 +54,7 @@ class _InputState extends State<Input> {
             borderRadius: BorderRadius.all(Radius.circular(4.0)),
           ),
           child: TextFormField(
+            //  keyboardType: TextInputType.number,
             keyboardType: widget.isCurrencyValue
                 ? TextInputType.number
                 : TextInputType.text,
@@ -67,7 +67,7 @@ class _InputState extends State<Input> {
               labelText: '',
               focusedBorder: border,
               enabledBorder: border,
-              prefix: Text('\$ '),
+              prefix: widget.isCurrencyValue ? Text('\$ ') : Container(),
               prefixStyle: ThemeTypography.headingSmall(
                 context,
                 color: ThemeColors.blueGray100,
