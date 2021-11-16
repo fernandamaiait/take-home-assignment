@@ -16,7 +16,7 @@ void main() {
         expect(store.totalMonths, 2);
         store.setFinalAmount(10000);
         expect(store.finalAmount, 10000);
-        expect(store.monthlyAmount, 5000);
+        expect(store.monthlyAmount, '\$5,000.00');
       },
     );
   });
