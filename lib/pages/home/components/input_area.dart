@@ -50,11 +50,13 @@ class _InputAreaState extends State<InputArea> {
           Flexible(
             flex: 3,
             child: Input(
-                label: 'Total amount',
-                controller: controller,
-                onChanged: (_) {
-                  store.setFinalAmount(controller!.numberValue);
-                }),
+              label: 'Total amount',
+              controller: controller,
+              isCurrencyValue: true,
+              onChanged: (_) {
+                store.setFinalAmount(controller!.numberValue);
+              },
+            ),
           ),
           isLargeScreen(context) ? SizedBox(width: 16) : SizedBox(height: 16),
           Flexible(

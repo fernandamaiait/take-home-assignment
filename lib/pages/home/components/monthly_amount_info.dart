@@ -118,8 +118,16 @@ class LowerContainer extends StatelessWidget {
                     text: 'to reach your ',
                   ),
                   TextSpan(
-                    text:
-                        '${formatCurrency(store.finalAmount)} goal by ${store.formattedMonth} ${store.finalDate.year}.',
+                    text: '${formatCurrency(store.finalAmount)} ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'goal by ',
+                  ),
+                  TextSpan(
+                    text: '${store.formattedMonth} ${store.finalDate.year}.',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                     ),
