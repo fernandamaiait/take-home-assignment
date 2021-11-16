@@ -1,16 +1,14 @@
-# take_home_assignment
+# About
 
-A new Flutter project.
+This code was implemented with Flutter. To run it, you must install the Flutter framework according these instructions: https://docs.flutter.dev/get-started/install
 
-## Getting Started
+After installing Flutter, you have to:
 
-This project is a starting point for a Flutter application.
+-clone this repo
+-go to the folder where de code was clonned
+-run in terminal: flutter pub get 
+-run in terminal: flutter run
 
-A few resources to get you started if this is your first Flutter project:
+There's an online version of this project in this url: https://fernandamaiait.github.io/#/
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+And you can also download an Android version here: 
