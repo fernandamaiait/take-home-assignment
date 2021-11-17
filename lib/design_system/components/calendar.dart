@@ -117,6 +117,7 @@ class Date extends StatelessWidget {
     final monthFormat = new DateFormat.MMMM();
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           monthFormat.format(date),

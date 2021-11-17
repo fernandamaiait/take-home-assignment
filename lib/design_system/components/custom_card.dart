@@ -22,15 +22,10 @@ class CustomCard extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
           boxShadow: [
             BoxShadow(
-              color: Color.fromARGB(
-                80,
-                30,
-                42,
-                50,
-              ),
-              blurRadius: 8,
-              offset: Offset(0, 5),
-            ),
+              color: Color.fromRGBO(30, 42, 50, 0.08),
+              blurRadius: 32,
+              offset: Offset(0, 16),
+            )
           ],
         ),
         child: this.child);
