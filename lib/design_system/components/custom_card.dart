@@ -13,21 +13,22 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 560,
-        padding: isLargeScreen(context)
-            ? EdgeInsets.fromLTRB(40, 35, 40, 40)
-            : EdgeInsets.fromLTRB(24, 31, 24, 40),
-        decoration: BoxDecoration(
-          color: ThemeColors.neutralWhite,
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromRGBO(30, 42, 50, 0.08),
-              blurRadius: 32,
-              offset: Offset(0, 16),
-            )
-          ],
-        ),
-        child: this.child);
+      width: 560,
+      padding: isLargeScreen(context)
+          ? EdgeInsets.fromLTRB(40, 35, 40, 40)
+          : EdgeInsets.fromLTRB(24, 31, 24, 40),
+      decoration: BoxDecoration(
+        color: ThemeColors.neutralWhite,
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(30, 42, 50, 0.08),
+            blurRadius: 32,
+            offset: Offset(0, 16),
+          )
+        ],
+      ),
+      child: this.child,
+    );
   }
 }
